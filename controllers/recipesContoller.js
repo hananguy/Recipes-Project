@@ -76,3 +76,18 @@ export const DeleteRecipe = (req, res) =>
         return res.status(404).end("Recipe not found.");
     }
 }
+
+export const UpdateRecipe = (req, res) =>
+{
+    const id = req.params.id;
+    const updatedRecipe = recipesModel.UpdateRecipe(id, req.body);
+
+    if(updatedRecipe === undefined)
+    {
+        return res.status(404).json("Recipe not found");
+    }
+    else
+    {
+        return res.status(200).json(updatedRecipe);
+    }
+}

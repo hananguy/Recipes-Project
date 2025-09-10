@@ -9,7 +9,7 @@ app.use(express.json());
 morgan.token("time", () => new Date().toISOString());
 app.use(morgan(":method :url :status :response-time ms - :time"));
 
-
+app.get('/', (req,res) => res.send('OK')); 
 app.use('/api/recipes', recipesRouter)
 
 

@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { v4 as uuidv4 } from "uuid";
 
 export const GetRecipes = function () {
   const filePath = path.resolve("data", "recipes.json");
@@ -22,9 +23,8 @@ export const AddRecipe = function(newRecipe)
     const filePath = path.resolve("data", "recipes.json");
     const data = fs.readFileSync(filePath, "utf-8");
     const recipes = JSON.parse(data);
-    newRecipe["id"] = recipes.length + 1;
+    newRecipe["id"] = uuidv4();
     newRecipe["createdAt"] = new Date().toISOString();
-    console.log(newRecipe);
     recipes.push(newRecipe);
     return newRecipe;
 }

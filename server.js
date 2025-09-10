@@ -8,14 +8,14 @@ import {sequelize} from './db/models/index.js';
 import enhancedRecipesRouter from "./routes/enhancedRecipesRoute.js"
 
 const app = express();
+app.get('/healthz', (req,res) => res.send('ok'));
+app.head('/healthz', (req,res) => res.sendStatus(200));
 app.use(express.json());
 morgan.token("time", () => new Date().toISOString());
 app.use(morgan(":method :url :status :response-time ms - :time"));
 
-
-// app.use('/api/recipes', recipesRouter)
-app.use('/api/auth', authRouter);
-app.use('/api/recipes', enhancedRecipesRouter);
+app.get('/', (req,res) => res.send('OK')); 
+app.use('/api/recipes', recipesRouter)
 
 
 app.listen(8080, async () =>
@@ -33,12 +33,3 @@ app.use((err, req, res, next) => {
     message: err.message || "Server Error",
   });
 })
-
-async function testConnection() {
- try {
-   await sequelize.authenticate();
-   console.log('✅ Database connection established successfully.');
- } catch (error) {
-   console.error('❌ Unable to connect to database:', error);
- }
-}

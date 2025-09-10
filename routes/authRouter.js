@@ -6,5 +6,8 @@ import authenticate from "../middlewares/authentication.js";
 router.post('/register', validateRegister, RegisterUser);
 router.post('/login', Login);
 router.get('/profile', authenticate, GetProfile);
-
+router.get('/check', (req, res) =>
+{
+    res.status(200).res("Every think working")
+})
 export default router;

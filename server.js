@@ -6,6 +6,7 @@ import recipesRouter from "./routes/recipesRouter.js";
 import authRouter from "./routes/authRouter.js"
 import {sequelize} from './db/models/index.js';
 import enhancedRecipesRouter from "./routes/enhancedRecipesRoute.js"
+const PORT = 8080
 
 const app = express();
 app.get('/healthz', (req,res) => res.send('ok'));
@@ -18,7 +19,7 @@ app.get('/', (req,res) => res.send('OK'));
 app.use('/api/recipes', recipesRouter)
 
 
-app.listen(8080, async () =>
+app.listen(process.env.PORT || PORT, async () =>
 {
   console.log(`🚀 Server running on port 8080`);
   await testConnection();
